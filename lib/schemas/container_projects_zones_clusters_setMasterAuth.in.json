@@ -1,0 +1,110 @@
+{
+    "type": "object",
+    "properties": {
+        "clusterId": {
+            "required": true,
+            "type": "string"
+        },
+        "projectId": {
+            "required": true,
+            "type": "string"
+        },
+        "zone": {
+            "required": true,
+            "type": "string"
+        },
+        "callback": {
+            "type": "string"
+        },
+        "fields": {
+            "type": "string"
+        },
+        "key": {
+            "type": "string"
+        },
+        "oauth_token": {
+            "type": "string"
+        },
+        "prettyPrint": {
+            "type": "boolean",
+            "default": true
+        },
+        "quotaUser": {
+            "type": "string"
+        },
+        "uploadType": {
+            "type": "string"
+        },
+        "upload_protocol": {
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "SetMasterAuthRequest updates the admin password of a cluster.",
+            "properties": {
+                "action": {
+                    "description": "The exact form of action to be taken on the master auth.",
+                    "enum": [
+                        "UNKNOWN",
+                        "SET_PASSWORD",
+                        "GENERATE_PASSWORD",
+                        "SET_USERNAME"
+                    ],
+                    "type": "string"
+                },
+                "clusterId": {
+                    "description": "Deprecated. The name of the cluster to upgrade.\nThis field has been deprecated and replaced by the name field.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "The name (project, location, cluster) of the cluster to set auth.\nSpecified in the format 'projects/*/locations/*/clusters/*'.",
+                    "type": "string"
+                },
+                "projectId": {
+                    "description": "Deprecated. The Google Developers Console [project ID or project\nnumber](https://support.google.com/cloud/answer/6158840).\nThis field has been deprecated and replaced by the name field.",
+                    "type": "string"
+                },
+                "update": {
+                    "description": "A description of the update.",
+                    "properties": {
+                        "clientCertificate": {
+                            "description": "[Output only] Base64-encoded public certificate used by clients to\nauthenticate to the cluster endpoint.",
+                            "type": "string"
+                        },
+                        "clientCertificateConfig": {
+                            "description": "Configuration for client certificate authentication on the cluster. For\nclusters before v1.12, if no configuration is specified, a client\ncertificate is issued.",
+                            "properties": {
+                                "issueClientCertificate": {
+                                    "description": "Issue a client certificate.",
+                                    "type": "boolean"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "clientKey": {
+                            "description": "[Output only] Base64-encoded private key used by clients to authenticate\nto the cluster endpoint.",
+                            "type": "string"
+                        },
+                        "clusterCaCertificate": {
+                            "description": "[Output only] Base64-encoded public certificate that is the root of\ntrust for the cluster.",
+                            "type": "string"
+                        },
+                        "password": {
+                            "description": "The password to use for HTTP basic authentication to the master endpoint.\nBecause the master endpoint is open to the Internet, you should create a\nstrong password.  If a password is provided for cluster creation, username\nmust be non-empty.",
+                            "type": "string"
+                        },
+                        "username": {
+                            "description": "The username to use for HTTP basic authentication to the master endpoint.\nFor clusters v1.6.0 and later, basic authentication can be disabled by\nleaving username unspecified (or setting it to the empty string).",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "zone": {
+                    "description": "Deprecated. The name of the Google Compute Engine\n[zone](/compute/docs/zones#available) in which the cluster\nresides.\nThis field has been deprecated and replaced by the name field.",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    }
+}

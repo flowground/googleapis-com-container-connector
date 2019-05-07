@@ -1,0 +1,86 @@
+{
+    "type": "object",
+    "properties": {
+        "name": {
+            "required": true,
+            "type": "string"
+        },
+        "access_token": {
+            "type": "string"
+        },
+        "alt": {
+            "type": "string",
+            "enum": [
+                "json",
+                "media",
+                "proto"
+            ],
+            "default": "json"
+        },
+        "callback": {
+            "type": "string"
+        },
+        "fields": {
+            "type": "string"
+        },
+        "key": {
+            "type": "string"
+        },
+        "oauth_token": {
+            "type": "string"
+        },
+        "prettyPrint": {
+            "type": "boolean",
+            "default": true
+        },
+        "quotaUser": {
+            "type": "string"
+        },
+        "uploadType": {
+            "type": "string"
+        },
+        "upload_protocol": {
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "SetNetworkPolicyRequest enables/disables network policy for a cluster.",
+            "properties": {
+                "clusterId": {
+                    "description": "Deprecated. The name of the cluster.\nThis field has been deprecated and replaced by the name field.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "The name (project, location, cluster id) of the cluster to set networking\npolicy. Specified in the format 'projects/*/locations/*/clusters/*'.",
+                    "type": "string"
+                },
+                "networkPolicy": {
+                    "description": "Configuration options for the NetworkPolicy feature.",
+                    "properties": {
+                        "enabled": {
+                            "description": "Whether network policy is enabled on the cluster.",
+                            "type": "boolean"
+                        },
+                        "provider": {
+                            "description": "The selected network policy provider.",
+                            "enum": [
+                                "PROVIDER_UNSPECIFIED",
+                                "CALICO"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "projectId": {
+                    "description": "Deprecated. The Google Developers Console [project ID or project\nnumber](https://developers.google.com/console/help/new/#projectnumber).\nThis field has been deprecated and replaced by the name field.",
+                    "type": "string"
+                },
+                "zone": {
+                    "description": "Deprecated. The name of the Google Compute Engine\n[zone](/compute/docs/zones#available) in which the cluster\nresides.\nThis field has been deprecated and replaced by the name field.",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    }
+}

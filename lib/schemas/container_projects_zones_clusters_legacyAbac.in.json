@@ -1,0 +1,68 @@
+{
+    "type": "object",
+    "properties": {
+        "clusterId": {
+            "required": true,
+            "type": "string"
+        },
+        "projectId": {
+            "required": true,
+            "type": "string"
+        },
+        "zone": {
+            "required": true,
+            "type": "string"
+        },
+        "callback": {
+            "type": "string"
+        },
+        "fields": {
+            "type": "string"
+        },
+        "key": {
+            "type": "string"
+        },
+        "oauth_token": {
+            "type": "string"
+        },
+        "prettyPrint": {
+            "type": "boolean",
+            "default": true
+        },
+        "quotaUser": {
+            "type": "string"
+        },
+        "uploadType": {
+            "type": "string"
+        },
+        "upload_protocol": {
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "SetLegacyAbacRequest enables or disables the ABAC authorization mechanism for\na cluster.",
+            "properties": {
+                "clusterId": {
+                    "description": "Deprecated. The name of the cluster to update.\nThis field has been deprecated and replaced by the name field.",
+                    "type": "string"
+                },
+                "enabled": {
+                    "description": "Whether ABAC authorization will be enabled in the cluster.",
+                    "type": "boolean"
+                },
+                "name": {
+                    "description": "The name (project, location, cluster id) of the cluster to set legacy abac.\nSpecified in the format 'projects/*/locations/*/clusters/*'.",
+                    "type": "string"
+                },
+                "projectId": {
+                    "description": "Deprecated. The Google Developers Console [project ID or project\nnumber](https://support.google.com/cloud/answer/6158840).\nThis field has been deprecated and replaced by the name field.",
+                    "type": "string"
+                },
+                "zone": {
+                    "description": "Deprecated. The name of the Google Compute Engine\n[zone](/compute/docs/zones#available) in which the cluster\nresides.\nThis field has been deprecated and replaced by the name field.",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    }
+}

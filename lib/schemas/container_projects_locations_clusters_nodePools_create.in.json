@@ -1,0 +1,303 @@
+{
+    "type": "object",
+    "properties": {
+        "parent": {
+            "required": true,
+            "type": "string"
+        },
+        "access_token": {
+            "type": "string"
+        },
+        "alt": {
+            "type": "string",
+            "enum": [
+                "json",
+                "media",
+                "proto"
+            ],
+            "default": "json"
+        },
+        "callback": {
+            "type": "string"
+        },
+        "fields": {
+            "type": "string"
+        },
+        "key": {
+            "type": "string"
+        },
+        "oauth_token": {
+            "type": "string"
+        },
+        "prettyPrint": {
+            "type": "boolean",
+            "default": true
+        },
+        "quotaUser": {
+            "type": "string"
+        },
+        "uploadType": {
+            "type": "string"
+        },
+        "upload_protocol": {
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "CreateNodePoolRequest creates a node pool for a cluster.",
+            "properties": {
+                "clusterId": {
+                    "description": "Deprecated. The name of the cluster.\nThis field has been deprecated and replaced by the parent field.",
+                    "type": "string"
+                },
+                "nodePool": {
+                    "description": "The node pool to create.",
+                    "properties": {
+                        "autoscaling": {
+                            "description": "Autoscaler configuration for this NodePool. Autoscaler is enabled\nonly if a valid configuration is present.",
+                            "properties": {
+                                "enabled": {
+                                    "description": "Is autoscaling enabled for this node pool.",
+                                    "type": "boolean"
+                                },
+                                "maxNodeCount": {
+                                    "description": "Maximum number of nodes in the NodePool. Must be >= min_node_count. There\nhas to enough quota to scale up the cluster.",
+                                    "format": "int32",
+                                    "type": "integer"
+                                },
+                                "minNodeCount": {
+                                    "description": "Minimum number of nodes in the NodePool. Must be >= 1 and <=\nmax_node_count.",
+                                    "format": "int32",
+                                    "type": "integer"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "conditions": {
+                            "description": "Which conditions caused the current node pool state.",
+                            "items": {
+                                "description": "StatusCondition describes why a cluster or a node pool has a certain status\n(e.g., ERROR or DEGRADED).",
+                                "properties": {
+                                    "code": {
+                                        "description": "Machine-friendly representation of the condition",
+                                        "enum": [
+                                            "UNKNOWN",
+                                            "GCE_STOCKOUT",
+                                            "GKE_SERVICE_ACCOUNT_DELETED",
+                                            "GCE_QUOTA_EXCEEDED",
+                                            "SET_BY_OPERATOR"
+                                        ],
+                                        "type": "string"
+                                    },
+                                    "message": {
+                                        "description": "Human-friendly representation of the condition",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "config": {
+                            "description": "The node configuration of the pool.",
+                            "properties": {
+                                "accelerators": {
+                                    "description": "A list of hardware accelerators to be attached to each node.\nSee https://cloud.google.com/compute/docs/gpus for more information about\nsupport for GPUs.",
+                                    "items": {
+                                        "description": "AcceleratorConfig represents a Hardware Accelerator request.",
+                                        "properties": {
+                                            "acceleratorCount": {
+                                                "description": "The number of the accelerator cards exposed to an instance.",
+                                                "format": "int64",
+                                                "type": "string"
+                                            },
+                                            "acceleratorType": {
+                                                "description": "The accelerator type resource name. List of supported accelerators\n[here](/compute/docs/gpus/#Introduction)",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "diskSizeGb": {
+                                    "description": "Size of the disk attached to each node, specified in GB.\nThe smallest allowed disk size is 10GB.\n\nIf unspecified, the default disk size is 100GB.",
+                                    "format": "int32",
+                                    "type": "integer"
+                                },
+                                "diskType": {
+                                    "description": "Type of the disk attached to each node (e.g. 'pd-standard' or 'pd-ssd')\n\nIf unspecified, the default disk type is 'pd-standard'",
+                                    "type": "string"
+                                },
+                                "imageType": {
+                                    "description": "The image type to use for this node. Note that for a given image type,\nthe latest version of it will be used.",
+                                    "type": "string"
+                                },
+                                "labels": {
+                                    "additionalProperties": {
+                                        "type": "string"
+                                    },
+                                    "description": "The map of Kubernetes labels (key/value pairs) to be applied to each node.\nThese will added in addition to any default label(s) that\nKubernetes may apply to the node.\nIn case of conflict in label keys, the applied set may differ depending on\nthe Kubernetes version -- it's best to assume the behavior is undefined\nand conflicts should be avoided.\nFor more information, including usage and the valid values, see:\nhttps://kubernetes.io/docs/concepts/overview/working-with-objects/labels/",
+                                    "type": "object"
+                                },
+                                "localSsdCount": {
+                                    "description": "The number of local SSD disks to be attached to the node.\n\nThe limit for this value is dependant upon the maximum number of\ndisks available on a machine per zone. See:\nhttps://cloud.google.com/compute/docs/disks/local-ssd#local_ssd_limits\nfor more information.",
+                                    "format": "int32",
+                                    "type": "integer"
+                                },
+                                "machineType": {
+                                    "description": "The name of a Google Compute Engine [machine\ntype](/compute/docs/machine-types) (e.g.\n`n1-standard-1`).\n\nIf unspecified, the default machine type is\n`n1-standard-1`.",
+                                    "type": "string"
+                                },
+                                "metadata": {
+                                    "additionalProperties": {
+                                        "type": "string"
+                                    },
+                                    "description": "The metadata key/value pairs assigned to instances in the cluster.\n\nKeys must conform to the regexp [a-zA-Z0-9-_]+ and be less than 128 bytes\nin length. These are reflected as part of a URL in the metadata server.\nAdditionally, to avoid ambiguity, keys must not conflict with any other\nmetadata keys for the project or be one of the reserved keys:\n \"cluster-location\"\n \"cluster-name\"\n \"cluster-uid\"\n \"configure-sh\"\n \"containerd-configure-sh\"\n \"enable-os-login\"\n \"gci-update-strategy\"\n \"gci-ensure-gke-docker\"\n \"instance-template\"\n \"kube-env\"\n \"startup-script\"\n \"user-data\"\n\nValues are free-form strings, and only have meaning as interpreted by\nthe image running in the instance. The only restriction placed on them is\nthat each value's size must be less than or equal to 32 KB.\n\nThe total size of all keys and values must be less than 512 KB.",
+                                    "type": "object"
+                                },
+                                "minCpuPlatform": {
+                                    "description": "Minimum CPU platform to be used by this instance. The instance may be\nscheduled on the specified or newer CPU platform. Applicable values are the\nfriendly names of CPU platforms, such as\n<code>minCpuPlatform: &quot;Intel Haswell&quot;</code> or\n<code>minCpuPlatform: &quot;Intel Sandy Bridge&quot;</code>. For more\ninformation, read [how to specify min CPU\nplatform](https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform)",
+                                    "type": "string"
+                                },
+                                "oauthScopes": {
+                                    "description": "The set of Google API scopes to be made available on all of the\nnode VMs under the \"default\" service account.\n\nThe following scopes are recommended, but not required, and by default are\nnot included:\n\n* `https://www.googleapis.com/auth/compute` is required for mounting\npersistent storage on your nodes.\n* `https://www.googleapis.com/auth/devstorage.read_only` is required for\ncommunicating with **gcr.io**\n(the [Google Container Registry](/container-registry/)).\n\nIf unspecified, no scopes are added, unless Cloud Logging or Cloud\nMonitoring are enabled, in which case their required scopes will be added.",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "preemptible": {
+                                    "description": "Whether the nodes are created as preemptible VM instances. See:\nhttps://cloud.google.com/compute/docs/instances/preemptible for more\ninformation about preemptible VM instances.",
+                                    "type": "boolean"
+                                },
+                                "serviceAccount": {
+                                    "description": "The Google Cloud Platform Service Account to be used by the node VMs. If\nno Service Account is specified, the \"default\" service account is used.",
+                                    "type": "string"
+                                },
+                                "tags": {
+                                    "description": "The list of instance tags applied to all nodes. Tags are used to identify\nvalid sources or targets for network firewalls and are specified by\nthe client during cluster or node pool creation. Each tag within the list\nmust comply with RFC1035.",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "taints": {
+                                    "description": "List of kubernetes taints to be applied to each node.\n\nFor more information, including usage and the valid values, see:\nhttps://kubernetes.io/docs/concepts/configuration/taint-and-toleration/",
+                                    "items": {
+                                        "description": "Kubernetes taint is comprised of three fields: key, value, and effect. Effect\ncan only be one of three types:  NoSchedule, PreferNoSchedule or NoExecute.\n\nFor more information, including usage and the valid values, see:\nhttps://kubernetes.io/docs/concepts/configuration/taint-and-toleration/",
+                                        "properties": {
+                                            "effect": {
+                                                "description": "Effect for taint.",
+                                                "enum": [
+                                                    "EFFECT_UNSPECIFIED",
+                                                    "NO_SCHEDULE",
+                                                    "PREFER_NO_SCHEDULE",
+                                                    "NO_EXECUTE"
+                                                ],
+                                                "type": "string"
+                                            },
+                                            "key": {
+                                                "description": "Key for taint.",
+                                                "type": "string"
+                                            },
+                                            "value": {
+                                                "description": "Value for taint.",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "initialNodeCount": {
+                            "description": "The initial node count for the pool. You must ensure that your\nCompute Engine <a href=\"/compute/docs/resource-quotas\">resource quota</a>\nis sufficient for this number of instances. You must also have available\nfirewall and routes quota.",
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "instanceGroupUrls": {
+                            "description": "[Output only] The resource URLs of the [managed instance\ngroups](/compute/docs/instance-groups/creating-groups-of-managed-instances)\nassociated with this node pool.",
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        "management": {
+                            "description": "NodeManagement configuration for this NodePool.",
+                            "properties": {
+                                "autoRepair": {
+                                    "description": "A flag that specifies whether the node auto-repair is enabled for the node\npool. If enabled, the nodes in this node pool will be monitored and, if\nthey fail health checks too many times, an automatic repair action will be\ntriggered.",
+                                    "type": "boolean"
+                                },
+                                "autoUpgrade": {
+                                    "description": "A flag that specifies whether node auto-upgrade is enabled for the node\npool. If enabled, node auto-upgrade helps keep the nodes in your node pool\nup to date with the latest release version of Kubernetes.",
+                                    "type": "boolean"
+                                },
+                                "upgradeOptions": {
+                                    "description": "Specifies the Auto Upgrade knobs for the node pool.",
+                                    "properties": {
+                                        "autoUpgradeStartTime": {
+                                            "description": "[Output only] This field is set when upgrades are about to commence\nwith the approximate start time for the upgrades, in\n[RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.",
+                                            "type": "string"
+                                        },
+                                        "description": {
+                                            "description": "[Output only] This field is set when upgrades are about to commence\nwith the description of the upgrade.",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "name": {
+                            "description": "The name of the node pool.",
+                            "type": "string"
+                        },
+                        "selfLink": {
+                            "description": "[Output only] Server-defined URL for the resource.",
+                            "type": "string"
+                        },
+                        "status": {
+                            "description": "[Output only] The status of the nodes in this pool instance.",
+                            "enum": [
+                                "STATUS_UNSPECIFIED",
+                                "PROVISIONING",
+                                "RUNNING",
+                                "RUNNING_WITH_ERROR",
+                                "RECONCILING",
+                                "STOPPING",
+                                "ERROR"
+                            ],
+                            "type": "string"
+                        },
+                        "statusMessage": {
+                            "description": "[Output only] Additional information about the current status of this\nnode pool instance, if available.",
+                            "type": "string"
+                        },
+                        "version": {
+                            "description": "The version of the Kubernetes of this node.",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "parent": {
+                    "description": "The parent (project, location, cluster id) where the node pool will be\ncreated. Specified in the format\n'projects/*/locations/*/clusters/*'.",
+                    "type": "string"
+                },
+                "projectId": {
+                    "description": "Deprecated. The Google Developers Console [project ID or project\nnumber](https://developers.google.com/console/help/new/#projectnumber).\nThis field has been deprecated and replaced by the parent field.",
+                    "type": "string"
+                },
+                "zone": {
+                    "description": "Deprecated. The name of the Google Compute Engine\n[zone](/compute/docs/zones#available) in which the cluster\nresides.\nThis field has been deprecated and replaced by the parent field.",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    }
+}

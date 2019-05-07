@@ -1,0 +1,94 @@
+{
+    "type": "object",
+    "properties": {
+        "name": {
+            "required": true,
+            "type": "string"
+        },
+        "access_token": {
+            "type": "string"
+        },
+        "alt": {
+            "type": "string",
+            "enum": [
+                "json",
+                "media",
+                "proto"
+            ],
+            "default": "json"
+        },
+        "callback": {
+            "type": "string"
+        },
+        "fields": {
+            "type": "string"
+        },
+        "key": {
+            "type": "string"
+        },
+        "oauth_token": {
+            "type": "string"
+        },
+        "prettyPrint": {
+            "type": "boolean",
+            "default": true
+        },
+        "quotaUser": {
+            "type": "string"
+        },
+        "uploadType": {
+            "type": "string"
+        },
+        "upload_protocol": {
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "SetMaintenancePolicyRequest sets the maintenance policy for a cluster.",
+            "properties": {
+                "clusterId": {
+                    "description": "The name of the cluster to update.",
+                    "type": "string"
+                },
+                "maintenancePolicy": {
+                    "description": "The maintenance policy to be set for the cluster. An empty field\nclears the existing maintenance policy.",
+                    "properties": {
+                        "window": {
+                            "description": "Specifies the maintenance window in which maintenance may be performed.",
+                            "properties": {
+                                "dailyMaintenanceWindow": {
+                                    "description": "DailyMaintenanceWindow specifies a daily maintenance operation window.",
+                                    "properties": {
+                                        "duration": {
+                                            "description": "[Output only] Duration of the time window, automatically chosen to be\nsmallest possible in the given scenario.\nDuration will be in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt)\nformat \"PTnHnMnS\".",
+                                            "type": "string"
+                                        },
+                                        "startTime": {
+                                            "description": "Time within the maintenance window to start the maintenance operations.\nTime format should be in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt)\nformat \"HH:MM”, where HH : [00-23] and MM : [00-59] GMT.",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "type": "object"
+                },
+                "name": {
+                    "description": "The name (project, location, cluster id) of the cluster to set maintenance\npolicy.\nSpecified in the format 'projects/*/locations/*/clusters/*'.",
+                    "type": "string"
+                },
+                "projectId": {
+                    "description": "The Google Developers Console [project ID or project\nnumber](https://support.google.com/cloud/answer/6158840).",
+                    "type": "string"
+                },
+                "zone": {
+                    "description": "The name of the Google Compute Engine\n[zone](/compute/docs/zones#available) in which the cluster\nresides.",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    }
+}

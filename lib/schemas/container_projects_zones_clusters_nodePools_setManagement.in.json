@@ -1,0 +1,97 @@
+{
+    "type": "object",
+    "properties": {
+        "clusterId": {
+            "required": true,
+            "type": "string"
+        },
+        "nodePoolId": {
+            "required": true,
+            "type": "string"
+        },
+        "projectId": {
+            "required": true,
+            "type": "string"
+        },
+        "zone": {
+            "required": true,
+            "type": "string"
+        },
+        "fields": {
+            "type": "string"
+        },
+        "key": {
+            "type": "string"
+        },
+        "oauth_token": {
+            "type": "string"
+        },
+        "prettyPrint": {
+            "type": "boolean",
+            "default": true
+        },
+        "quotaUser": {
+            "type": "string"
+        },
+        "uploadType": {
+            "type": "string"
+        },
+        "upload_protocol": {
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "SetNodePoolManagementRequest sets the node management properties of a node\npool.",
+            "properties": {
+                "clusterId": {
+                    "description": "Deprecated. The name of the cluster to update.\nThis field has been deprecated and replaced by the name field.",
+                    "type": "string"
+                },
+                "management": {
+                    "description": "NodeManagement configuration for the node pool.",
+                    "properties": {
+                        "autoRepair": {
+                            "description": "A flag that specifies whether the node auto-repair is enabled for the node\npool. If enabled, the nodes in this node pool will be monitored and, if\nthey fail health checks too many times, an automatic repair action will be\ntriggered.",
+                            "type": "boolean"
+                        },
+                        "autoUpgrade": {
+                            "description": "A flag that specifies whether node auto-upgrade is enabled for the node\npool. If enabled, node auto-upgrade helps keep the nodes in your node pool\nup to date with the latest release version of Kubernetes.",
+                            "type": "boolean"
+                        },
+                        "upgradeOptions": {
+                            "description": "Specifies the Auto Upgrade knobs for the node pool.",
+                            "properties": {
+                                "autoUpgradeStartTime": {
+                                    "description": "[Output only] This field is set when upgrades are about to commence\nwith the approximate start time for the upgrades, in\n[RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.",
+                                    "type": "string"
+                                },
+                                "description": {
+                                    "description": "[Output only] This field is set when upgrades are about to commence\nwith the description of the upgrade.",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "type": "object"
+                },
+                "name": {
+                    "description": "The name (project, location, cluster, node pool id) of the node pool to set\nmanagement properties. Specified in the format\n'projects/*/locations/*/clusters/*/nodePools/*'.",
+                    "type": "string"
+                },
+                "nodePoolId": {
+                    "description": "Deprecated. The name of the node pool to update.\nThis field has been deprecated and replaced by the name field.",
+                    "type": "string"
+                },
+                "projectId": {
+                    "description": "Deprecated. The Google Developers Console [project ID or project\nnumber](https://support.google.com/cloud/answer/6158840).\nThis field has been deprecated and replaced by the name field.",
+                    "type": "string"
+                },
+                "zone": {
+                    "description": "Deprecated. The name of the Google Compute Engine\n[zone](/compute/docs/zones#available) in which the cluster\nresides.\nThis field has been deprecated and replaced by the name field.",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    }
+}

@@ -1,0 +1,191 @@
+{
+    "type": "object",
+    "properties": {
+        "clusterId": {
+            "required": true,
+            "type": "string"
+        },
+        "projectId": {
+            "required": true,
+            "type": "string"
+        },
+        "zone": {
+            "required": true,
+            "type": "string"
+        },
+        "callback": {
+            "type": "string"
+        },
+        "fields": {
+            "type": "string"
+        },
+        "key": {
+            "type": "string"
+        },
+        "oauth_token": {
+            "type": "string"
+        },
+        "prettyPrint": {
+            "type": "boolean",
+            "default": true
+        },
+        "quotaUser": {
+            "type": "string"
+        },
+        "uploadType": {
+            "type": "string"
+        },
+        "upload_protocol": {
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "UpdateClusterRequest updates the settings of a cluster.",
+            "properties": {
+                "clusterId": {
+                    "description": "Deprecated. The name of the cluster to upgrade.\nThis field has been deprecated and replaced by the name field.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "The name (project, location, cluster) of the cluster to update.\nSpecified in the format 'projects/*/locations/*/clusters/*'.",
+                    "type": "string"
+                },
+                "projectId": {
+                    "description": "Deprecated. The Google Developers Console [project ID or project\nnumber](https://support.google.com/cloud/answer/6158840).\nThis field has been deprecated and replaced by the name field.",
+                    "type": "string"
+                },
+                "update": {
+                    "description": "A description of the update.",
+                    "properties": {
+                        "desiredAddonsConfig": {
+                            "description": "Configurations for the various addons available to run in the cluster.",
+                            "properties": {
+                                "horizontalPodAutoscaling": {
+                                    "description": "Configuration for the horizontal pod autoscaling feature, which\nincreases or decreases the number of replica pods a replication controller\nhas based on the resource usage of the existing pods.",
+                                    "properties": {
+                                        "disabled": {
+                                            "description": "Whether the Horizontal Pod Autoscaling feature is enabled in the cluster.\nWhen enabled, it ensures that a Heapster pod is running in the cluster,\nwhich is also used by the Cloud Monitoring service.",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "httpLoadBalancing": {
+                                    "description": "Configuration for the HTTP (L7) load balancing controller addon, which\nmakes it easy to set up HTTP load balancers for services in a cluster.",
+                                    "properties": {
+                                        "disabled": {
+                                            "description": "Whether the HTTP Load Balancing controller is enabled in the cluster.\nWhen enabled, it runs a small pod in the cluster that manages the load\nbalancers.",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "kubernetesDashboard": {
+                                    "description": "Configuration for the Kubernetes Dashboard.",
+                                    "properties": {
+                                        "disabled": {
+                                            "description": "Whether the Kubernetes Dashboard is enabled for this cluster.",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "networkPolicyConfig": {
+                                    "description": "Configuration for NetworkPolicy. This only tracks whether the addon\nis enabled or not on the Master, it does not track whether network policy\nis enabled for the nodes.",
+                                    "properties": {
+                                        "disabled": {
+                                            "description": "Whether NetworkPolicy is enabled for this cluster.",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "desiredImageType": {
+                            "description": "The desired image type for the node pool.\nNOTE: Set the \"desired_node_pool\" field as well.",
+                            "type": "string"
+                        },
+                        "desiredLocations": {
+                            "description": "The desired list of Google Compute Engine\n[zones](/compute/docs/zones#available) in which the cluster's nodes\nshould be located. Changing the locations a cluster is in will result\nin nodes being either created or removed from the cluster, depending on\nwhether locations are being added or removed.\n\nThis list must always include the cluster's primary zone.",
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        "desiredMasterAuthorizedNetworksConfig": {
+                            "description": "The desired configuration options for master authorized networks feature.",
+                            "properties": {
+                                "cidrBlocks": {
+                                    "description": "cidr_blocks define up to 10 external networks that could access\nKubernetes master through HTTPS.",
+                                    "items": {
+                                        "description": "CidrBlock contains an optional name and one CIDR block.",
+                                        "properties": {
+                                            "cidrBlock": {
+                                                "description": "cidr_block must be specified in CIDR notation.",
+                                                "type": "string"
+                                            },
+                                            "displayName": {
+                                                "description": "display_name is an optional field for users to identify CIDR blocks.",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "enabled": {
+                                    "description": "Whether or not master authorized networks is enabled.",
+                                    "type": "boolean"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "desiredMasterVersion": {
+                            "description": "The Kubernetes version to change the master to.\n\nUsers may specify either explicit versions offered by\nKubernetes Engine or version aliases, which have the following behavior:\n\n- \"latest\": picks the highest valid Kubernetes version\n- \"1.X\": picks the highest valid patch+gke.N patch in the 1.X version\n- \"1.X.Y\": picks the highest valid gke.N patch in the 1.X.Y version\n- \"1.X.Y-gke.N\": picks an explicit Kubernetes version\n- \"-\": picks the default Kubernetes version",
+                            "type": "string"
+                        },
+                        "desiredMonitoringService": {
+                            "description": "The monitoring service the cluster should use to write metrics.\nCurrently available options:\n\n* \"monitoring.googleapis.com\" - the Google Cloud Monitoring service\n* \"none\" - no metrics will be exported from the cluster",
+                            "type": "string"
+                        },
+                        "desiredNodePoolAutoscaling": {
+                            "description": "Autoscaler configuration for the node pool specified in\ndesired_node_pool_id. If there is only one pool in the\ncluster and desired_node_pool_id is not provided then\nthe change applies to that single node pool.",
+                            "properties": {
+                                "enabled": {
+                                    "description": "Is autoscaling enabled for this node pool.",
+                                    "type": "boolean"
+                                },
+                                "maxNodeCount": {
+                                    "description": "Maximum number of nodes in the NodePool. Must be >= min_node_count. There\nhas to enough quota to scale up the cluster.",
+                                    "format": "int32",
+                                    "type": "integer"
+                                },
+                                "minNodeCount": {
+                                    "description": "Minimum number of nodes in the NodePool. Must be >= 1 and <=\nmax_node_count.",
+                                    "format": "int32",
+                                    "type": "integer"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "desiredNodePoolId": {
+                            "description": "The node pool to be upgraded. This field is mandatory if\n\"desired_node_version\", \"desired_image_family\" or\n\"desired_node_pool_autoscaling\" is specified and there is more than one\nnode pool on the cluster.",
+                            "type": "string"
+                        },
+                        "desiredNodeVersion": {
+                            "description": "The Kubernetes version to change the nodes to (typically an\nupgrade).\n\nUsers may specify either explicit versions offered by\nKubernetes Engine or version aliases, which have the following behavior:\n\n- \"latest\": picks the highest valid Kubernetes version\n- \"1.X\": picks the highest valid patch+gke.N patch in the 1.X version\n- \"1.X.Y\": picks the highest valid gke.N patch in the 1.X.Y version\n- \"1.X.Y-gke.N\": picks an explicit Kubernetes version\n- \"-\": picks the Kubernetes master version",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "zone": {
+                    "description": "Deprecated. The name of the Google Compute Engine\n[zone](/compute/docs/zones#available) in which the cluster\nresides.\nThis field has been deprecated and replaced by the name field.",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    }
+}

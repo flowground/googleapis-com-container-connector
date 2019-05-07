@@ -1,0 +1,1036 @@
+{
+    "title": "Kubernetes Engine",
+    "description": "Builds and manages container-based applications, powered by the open source Kubernetes technology.",
+    "docsUrl": "https://cloud.google.com/container-engine/",
+    "url": "https://api.apis.guru/v2/specs/googleapis.com/container/v1/swagger.json",
+    "envVars": {
+        "OAUTH_CLIENT_ID": {
+            "description": "OAuth Client ID"
+        },
+        "OAUTH_CLIENT_SECRET": {
+            "description": "OAuth Client Secret"
+        }
+    },
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://container.googleapis.com/",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            },
+            "Oauth2": {
+                "label": "Oauth 2.0 authentication",
+                "viewClass": "OAuthFieldView"
+            }
+        },
+        "oauth2": {
+            "client_id": "{{OAUTH_CLIENT_ID}}",
+            "client_secret": "{{OAUTH_CLIENT_SECRET}}",
+            "auth_uri": "https://accounts.google.com/o/oauth2/auth"
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "container_projects_zones_clusters_list": {
+            "main": "./lib/actions/container_projects_zones_clusters_list.js",
+            "title": "Lists all clusters owned by a project in either the specified zone or all\nzones.",
+            "description": "Lists all clusters owned by a project in either the specified zone or all\nzones.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_zones_clusters_list.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_zones_clusters_create": {
+            "main": "./lib/actions/container_projects_zones_clusters_create.js",
+            "title": "Creates a cluster, consisting of the specified number and type of Google\nCompute Engine instances.\n\nBy default, the cluster is created in the project's\n[default network](/compute/docs/networks-and-firewalls#networks).\n\nOne firewall is added for the cluster. After cluster creation,\nthe cluster creates routes for each node to allow the containers\non that node to communicate with all other instances in the\ncluster.\n\nFinally, an entry is added to the project's global metadata indicating\nwhich CIDR range is being used by the cluster.",
+            "description": "Creates a cluster, consisting of the specified number and type of Google\nCompute Engine instances.\n\nBy default, the cluster is created in the project's\n[default network](/compute/docs/networks-and-firewalls#networks).\n\nOne firewall is added for the cluster. After cluster creation,\nthe cluster creates routes for each node to allow the containers\non that node to communicate with all other instances in the\ncluster.\n\nFinally, an entry is added to the project's global metadata indicating\nwhich CIDR range is being used by the cluster.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_zones_clusters_create.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_zones_clusters_delete": {
+            "main": "./lib/actions/container_projects_zones_clusters_delete.js",
+            "title": "Deletes the cluster, including the Kubernetes endpoint and all worker\nnodes.\n\nFirewalls and routes that were configured during cluster creation\nare also deleted.\n\nOther Google Compute Engine resources that might be in use by the cluster\n(e.g. load balancer resources) will not be deleted if they weren't present\nat the initial create time.",
+            "description": "Deletes the cluster, including the Kubernetes endpoint and all worker\nnodes.\n\nFirewalls and routes that were configured during cluster creation\nare also deleted.\n\nOther Google Compute Engine resources that might be in use by the cluster\n(e.g. load balancer resources) will not be deleted if they weren't present\nat the initial create time.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_zones_clusters_delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_zones_clusters_get": {
+            "main": "./lib/actions/container_projects_zones_clusters_get.js",
+            "title": "Gets the details of a specific cluster.",
+            "description": "Gets the details of a specific cluster.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_zones_clusters_get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_zones_clusters_update": {
+            "main": "./lib/actions/container_projects_zones_clusters_update.js",
+            "title": "Updates the settings of a specific cluster.",
+            "description": "Updates the settings of a specific cluster.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_zones_clusters_update.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_zones_clusters_addons": {
+            "main": "./lib/actions/container_projects_zones_clusters_addons.js",
+            "title": "Sets the addons for a specific cluster.",
+            "description": "Sets the addons for a specific cluster.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_zones_clusters_addons.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_zones_clusters_legacyAbac": {
+            "main": "./lib/actions/container_projects_zones_clusters_legacyAbac.js",
+            "title": "Enables or disables the ABAC authorization mechanism on a cluster.",
+            "description": "Enables or disables the ABAC authorization mechanism on a cluster.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_zones_clusters_legacyAbac.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_zones_clusters_locations": {
+            "main": "./lib/actions/container_projects_zones_clusters_locations.js",
+            "title": "Sets the locations for a specific cluster.",
+            "description": "Sets the locations for a specific cluster.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_zones_clusters_locations.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_zones_clusters_logging": {
+            "main": "./lib/actions/container_projects_zones_clusters_logging.js",
+            "title": "Sets the logging service for a specific cluster.",
+            "description": "Sets the logging service for a specific cluster.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_zones_clusters_logging.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_zones_clusters_master": {
+            "main": "./lib/actions/container_projects_zones_clusters_master.js",
+            "title": "Updates the master for a specific cluster.",
+            "description": "Updates the master for a specific cluster.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_zones_clusters_master.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_zones_clusters_monitoring": {
+            "main": "./lib/actions/container_projects_zones_clusters_monitoring.js",
+            "title": "Sets the monitoring service for a specific cluster.",
+            "description": "Sets the monitoring service for a specific cluster.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_zones_clusters_monitoring.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_zones_clusters_nodePools_list": {
+            "main": "./lib/actions/container_projects_zones_clusters_nodePools_list.js",
+            "title": "Lists the node pools for a cluster.",
+            "description": "Lists the node pools for a cluster.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_zones_clusters_nodePools_list.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_zones_clusters_nodePools_create": {
+            "main": "./lib/actions/container_projects_zones_clusters_nodePools_create.js",
+            "title": "Creates a node pool for a cluster.",
+            "description": "Creates a node pool for a cluster.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_zones_clusters_nodePools_create.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_zones_clusters_nodePools_delete": {
+            "main": "./lib/actions/container_projects_zones_clusters_nodePools_delete.js",
+            "title": "Deletes a node pool from a cluster.",
+            "description": "Deletes a node pool from a cluster.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_zones_clusters_nodePools_delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_zones_clusters_nodePools_get": {
+            "main": "./lib/actions/container_projects_zones_clusters_nodePools_get.js",
+            "title": "Retrieves the node pool requested.",
+            "description": "Retrieves the node pool requested.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_zones_clusters_nodePools_get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_zones_clusters_nodePools_autoscaling": {
+            "main": "./lib/actions/container_projects_zones_clusters_nodePools_autoscaling.js",
+            "title": "Sets the autoscaling settings for a specific node pool.",
+            "description": "Sets the autoscaling settings for a specific node pool.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_zones_clusters_nodePools_autoscaling.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_zones_clusters_nodePools_setManagement": {
+            "main": "./lib/actions/container_projects_zones_clusters_nodePools_setManagement.js",
+            "title": "Sets the NodeManagement options for a node pool.",
+            "description": "Sets the NodeManagement options for a node pool.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_zones_clusters_nodePools_setManagement.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_zones_clusters_nodePools_setSize": {
+            "main": "./lib/actions/container_projects_zones_clusters_nodePools_setSize.js",
+            "title": "Sets the size for a specific node pool.",
+            "description": "Sets the size for a specific node pool.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_zones_clusters_nodePools_setSize.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_zones_clusters_nodePools_update": {
+            "main": "./lib/actions/container_projects_zones_clusters_nodePools_update.js",
+            "title": "Updates the version and/or image type for a specific node pool.",
+            "description": "Updates the version and/or image type for a specific node pool.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_zones_clusters_nodePools_update.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_zones_clusters_nodePools_rollback": {
+            "main": "./lib/actions/container_projects_zones_clusters_nodePools_rollback.js",
+            "title": "Roll back the previously Aborted or Failed NodePool upgrade.\nThis will be an no-op if the last upgrade successfully completed.",
+            "description": "Roll back the previously Aborted or Failed NodePool upgrade.\nThis will be an no-op if the last upgrade successfully completed.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_zones_clusters_nodePools_rollback.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_zones_clusters_resourceLabels": {
+            "main": "./lib/actions/container_projects_zones_clusters_resourceLabels.js",
+            "title": "Sets labels on a cluster.",
+            "description": "Sets labels on a cluster.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_zones_clusters_resourceLabels.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_zones_clusters_completeIpRotation": {
+            "main": "./lib/actions/container_projects_zones_clusters_completeIpRotation.js",
+            "title": "Completes master IP rotation.",
+            "description": "Completes master IP rotation.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_zones_clusters_completeIpRotation.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_zones_clusters_setMaintenancePolicy": {
+            "main": "./lib/actions/container_projects_zones_clusters_setMaintenancePolicy.js",
+            "title": "Sets the maintenance policy for a cluster.",
+            "description": "Sets the maintenance policy for a cluster.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_zones_clusters_setMaintenancePolicy.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_zones_clusters_setMasterAuth": {
+            "main": "./lib/actions/container_projects_zones_clusters_setMasterAuth.js",
+            "title": "Used to set master auth materials. Currently supports :-\nChanging the admin password for a specific cluster.\nThis can be either via password generation or explicitly set the password.",
+            "description": "Used to set master auth materials. Currently supports :-\nChanging the admin password for a specific cluster.\nThis can be either via password generation or explicitly set the password.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_zones_clusters_setMasterAuth.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_zones_clusters_setNetworkPolicy": {
+            "main": "./lib/actions/container_projects_zones_clusters_setNetworkPolicy.js",
+            "title": "Enables/Disables Network Policy for a cluster.",
+            "description": "Enables/Disables Network Policy for a cluster.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_zones_clusters_setNetworkPolicy.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_zones_clusters_startIpRotation": {
+            "main": "./lib/actions/container_projects_zones_clusters_startIpRotation.js",
+            "title": "Start master IP rotation.",
+            "description": "Start master IP rotation.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_zones_clusters_startIpRotation.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_zones_operations_list": {
+            "main": "./lib/actions/container_projects_zones_operations_list.js",
+            "title": "Lists all operations in a project in a specific zone or all zones.",
+            "description": "Lists all operations in a project in a specific zone or all zones.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_zones_operations_list.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_zones_operations_get": {
+            "main": "./lib/actions/container_projects_zones_operations_get.js",
+            "title": "Gets the specified operation.",
+            "description": "Gets the specified operation.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_zones_operations_get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_zones_operations_cancel": {
+            "main": "./lib/actions/container_projects_zones_operations_cancel.js",
+            "title": "Cancels the specified operation.",
+            "description": "Cancels the specified operation.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_zones_operations_cancel.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_zones_getServerconfig": {
+            "main": "./lib/actions/container_projects_zones_getServerconfig.js",
+            "title": "Returns configuration info about the Kubernetes Engine service.",
+            "description": "Returns configuration info about the Kubernetes Engine service.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_zones_getServerconfig.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_locations_clusters_nodePools_delete": {
+            "main": "./lib/actions/container_projects_locations_clusters_nodePools_delete.js",
+            "title": "Deletes a node pool from a cluster.",
+            "description": "Deletes a node pool from a cluster.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_locations_clusters_nodePools_delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_locations_clusters_nodePools_get": {
+            "main": "./lib/actions/container_projects_locations_clusters_nodePools_get.js",
+            "title": "Retrieves the node pool requested.",
+            "description": "Retrieves the node pool requested.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_locations_clusters_nodePools_get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_locations_clusters_nodePools_update": {
+            "main": "./lib/actions/container_projects_locations_clusters_nodePools_update.js",
+            "title": "Updates the version and/or image type for a specific node pool.",
+            "description": "Updates the version and/or image type for a specific node pool.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_locations_clusters_nodePools_update.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_locations_getServerConfig": {
+            "main": "./lib/actions/container_projects_locations_getServerConfig.js",
+            "title": "Returns configuration info about the Kubernetes Engine service.",
+            "description": "Returns configuration info about the Kubernetes Engine service.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_locations_getServerConfig.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_locations_operations_cancel": {
+            "main": "./lib/actions/container_projects_locations_operations_cancel.js",
+            "title": "Cancels the specified operation.",
+            "description": "Cancels the specified operation.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_locations_operations_cancel.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_locations_clusters_completeIpRotation": {
+            "main": "./lib/actions/container_projects_locations_clusters_completeIpRotation.js",
+            "title": "Completes master IP rotation.",
+            "description": "Completes master IP rotation.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_locations_clusters_completeIpRotation.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_locations_clusters_nodePools_rollback": {
+            "main": "./lib/actions/container_projects_locations_clusters_nodePools_rollback.js",
+            "title": "Roll back the previously Aborted or Failed NodePool upgrade.\nThis will be an no-op if the last upgrade successfully completed.",
+            "description": "Roll back the previously Aborted or Failed NodePool upgrade.\nThis will be an no-op if the last upgrade successfully completed.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_locations_clusters_nodePools_rollback.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_locations_clusters_setAddons": {
+            "main": "./lib/actions/container_projects_locations_clusters_setAddons.js",
+            "title": "Sets the addons for a specific cluster.",
+            "description": "Sets the addons for a specific cluster.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_locations_clusters_setAddons.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_locations_clusters_nodePools_setAutoscaling": {
+            "main": "./lib/actions/container_projects_locations_clusters_nodePools_setAutoscaling.js",
+            "title": "Sets the autoscaling settings for a specific node pool.",
+            "description": "Sets the autoscaling settings for a specific node pool.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_locations_clusters_nodePools_setAutoscaling.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_locations_clusters_setLegacyAbac": {
+            "main": "./lib/actions/container_projects_locations_clusters_setLegacyAbac.js",
+            "title": "Enables or disables the ABAC authorization mechanism on a cluster.",
+            "description": "Enables or disables the ABAC authorization mechanism on a cluster.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_locations_clusters_setLegacyAbac.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_locations_clusters_setLocations": {
+            "main": "./lib/actions/container_projects_locations_clusters_setLocations.js",
+            "title": "Sets the locations for a specific cluster.",
+            "description": "Sets the locations for a specific cluster.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_locations_clusters_setLocations.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_locations_clusters_setLogging": {
+            "main": "./lib/actions/container_projects_locations_clusters_setLogging.js",
+            "title": "Sets the logging service for a specific cluster.",
+            "description": "Sets the logging service for a specific cluster.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_locations_clusters_setLogging.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_locations_clusters_setMaintenancePolicy": {
+            "main": "./lib/actions/container_projects_locations_clusters_setMaintenancePolicy.js",
+            "title": "Sets the maintenance policy for a cluster.",
+            "description": "Sets the maintenance policy for a cluster.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_locations_clusters_setMaintenancePolicy.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_locations_clusters_nodePools_setManagement": {
+            "main": "./lib/actions/container_projects_locations_clusters_nodePools_setManagement.js",
+            "title": "Sets the NodeManagement options for a node pool.",
+            "description": "Sets the NodeManagement options for a node pool.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_locations_clusters_nodePools_setManagement.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_locations_clusters_setMasterAuth": {
+            "main": "./lib/actions/container_projects_locations_clusters_setMasterAuth.js",
+            "title": "Used to set master auth materials. Currently supports :-\nChanging the admin password for a specific cluster.\nThis can be either via password generation or explicitly set the password.",
+            "description": "Used to set master auth materials. Currently supports :-\nChanging the admin password for a specific cluster.\nThis can be either via password generation or explicitly set the password.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_locations_clusters_setMasterAuth.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_locations_clusters_setMonitoring": {
+            "main": "./lib/actions/container_projects_locations_clusters_setMonitoring.js",
+            "title": "Sets the monitoring service for a specific cluster.",
+            "description": "Sets the monitoring service for a specific cluster.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_locations_clusters_setMonitoring.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_locations_clusters_setNetworkPolicy": {
+            "main": "./lib/actions/container_projects_locations_clusters_setNetworkPolicy.js",
+            "title": "Enables/Disables Network Policy for a cluster.",
+            "description": "Enables/Disables Network Policy for a cluster.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_locations_clusters_setNetworkPolicy.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_locations_clusters_setResourceLabels": {
+            "main": "./lib/actions/container_projects_locations_clusters_setResourceLabels.js",
+            "title": "Sets labels on a cluster.",
+            "description": "Sets labels on a cluster.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_locations_clusters_setResourceLabels.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_locations_clusters_nodePools_setSize": {
+            "main": "./lib/actions/container_projects_locations_clusters_nodePools_setSize.js",
+            "title": "Sets the size for a specific node pool.",
+            "description": "Sets the size for a specific node pool.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_locations_clusters_nodePools_setSize.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_locations_clusters_startIpRotation": {
+            "main": "./lib/actions/container_projects_locations_clusters_startIpRotation.js",
+            "title": "Start master IP rotation.",
+            "description": "Start master IP rotation.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_locations_clusters_startIpRotation.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_locations_clusters_updateMaster": {
+            "main": "./lib/actions/container_projects_locations_clusters_updateMaster.js",
+            "title": "Updates the master for a specific cluster.",
+            "description": "Updates the master for a specific cluster.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_locations_clusters_updateMaster.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_locations_clusters_well_known_getOpenid_configuration": {
+            "main": "./lib/actions/container_projects_locations_clusters_well_known_getOpenid_configuration.js",
+            "title": "GetOpenIDConfig gets the OIDC discovery document for the cluster.\nSee the OpenID Connect Discovery 1.0 specification for details.\nhttps://openid.net/specs/openid-connect-discovery-1_0.html\nThis API is not yet intended for general use, and is not available for all\nclusters.",
+            "description": "GetOpenIDConfig gets the OIDC discovery document for the cluster.\nSee the OpenID Connect Discovery 1.0 specification for details.\nhttps://openid.net/specs/openid-connect-discovery-1_0.html\nThis API is not yet intended for general use, and is not available for all\nclusters.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_locations_clusters_well_known_getOpenid_configuration.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_locations_clusters_list": {
+            "main": "./lib/actions/container_projects_locations_clusters_list.js",
+            "title": "Lists all clusters owned by a project in either the specified zone or all\nzones.",
+            "description": "Lists all clusters owned by a project in either the specified zone or all\nzones.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_locations_clusters_list.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_locations_clusters_create": {
+            "main": "./lib/actions/container_projects_locations_clusters_create.js",
+            "title": "Creates a cluster, consisting of the specified number and type of Google\nCompute Engine instances.\n\nBy default, the cluster is created in the project's\n[default network](/compute/docs/networks-and-firewalls#networks).\n\nOne firewall is added for the cluster. After cluster creation,\nthe cluster creates routes for each node to allow the containers\non that node to communicate with all other instances in the\ncluster.\n\nFinally, an entry is added to the project's global metadata indicating\nwhich CIDR range is being used by the cluster.",
+            "description": "Creates a cluster, consisting of the specified number and type of Google\nCompute Engine instances.\n\nBy default, the cluster is created in the project's\n[default network](/compute/docs/networks-and-firewalls#networks).\n\nOne firewall is added for the cluster. After cluster creation,\nthe cluster creates routes for each node to allow the containers\non that node to communicate with all other instances in the\ncluster.\n\nFinally, an entry is added to the project's global metadata indicating\nwhich CIDR range is being used by the cluster.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_locations_clusters_create.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_locations_clusters_getJwks": {
+            "main": "./lib/actions/container_projects_locations_clusters_getJwks.js",
+            "title": "GetJSONWebKeys gets the public component of the cluster signing keys in\nJSON Web Key format.\nThis API is not yet intended for general use, and is not available for all\nclusters.",
+            "description": "GetJSONWebKeys gets the public component of the cluster signing keys in\nJSON Web Key format.\nThis API is not yet intended for general use, and is not available for all\nclusters.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_locations_clusters_getJwks.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_locations_clusters_nodePools_list": {
+            "main": "./lib/actions/container_projects_locations_clusters_nodePools_list.js",
+            "title": "Lists the node pools for a cluster.",
+            "description": "Lists the node pools for a cluster.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_locations_clusters_nodePools_list.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_locations_clusters_nodePools_create": {
+            "main": "./lib/actions/container_projects_locations_clusters_nodePools_create.js",
+            "title": "Creates a node pool for a cluster.",
+            "description": "Creates a node pool for a cluster.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_locations_clusters_nodePools_create.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "container_projects_locations_operations_list": {
+            "main": "./lib/actions/container_projects_locations_operations_list.js",
+            "title": "Lists all operations in a project in a specific zone or all zones.",
+            "description": "Lists all operations in a project in a specific zone or all zones.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/container_projects_locations_operations_list.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}
